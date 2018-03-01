@@ -400,6 +400,7 @@ class ListFilterSelect extends React.Component {
       />
 			</div>
 			<div style={{display:'inline-block', margin:0, width:'100%'}}>
+      
       <InfiniteScroll class='App-list'
           next={this.handleScrollEnd}
           refresh={()=>{}}
@@ -420,7 +421,7 @@ class ListFilterSelect extends React.Component {
             </div>
           }
           useWindow={true}>
-    		 <List style={{maxHeight: '100%', overflow: 'auto',float:'center' }}>
+    	
       	 {
 				 		torender
     		     .map((k)=><ListItem 
@@ -430,8 +431,9 @@ class ListFilterSelect extends React.Component {
       	         primaryText={k.desc} 
       	         secondaryText={k.id}/>)
       	 }
-    		 </List>
+    		 
       </InfiniteScroll>
+      
 			</div>
     </div>
     );
