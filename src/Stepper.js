@@ -37,6 +37,8 @@ import RightIcon from 'react-material-icons/icons/hardware/keyboard-arrow-right'
 import LeftIcon from 'react-material-icons/icons/hardware/keyboard-arrow-left';
 import Avatar from 'material-ui/Avatar';
 
+import {isMobile} from 'react-device-detect'
+
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -510,12 +512,12 @@ class NICEStepper extends React.Component {
     const contentStyle = {margin: '0 16px'};
     return (
       <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
-        <Stepper activeStep={stepIndex}>
+        <Stepper activeStep={stepIndex} orientation={isMobile?"vertical":"horizontal"}>
           {this.NICEStep(0)}
           {this.NICEStep(1)}
           {this.NICEStep(2)}
           {this.NICEStep(3)}
-        </Stepper>
+        </Stepper >
         <div style={contentStyle}>
           {finished ? (
             <div>
