@@ -37,10 +37,17 @@ import RightIcon from 'react-material-icons/icons/hardware/keyboard-arrow-right'
 import LeftIcon from 'react-material-icons/icons/hardware/keyboard-arrow-left';
 import Avatar from 'material-ui/Avatar';
 
+import AutoComplete from 'material-ui/AutoComplete';
+
+
 import {isMobile} from 'react-device-detect'
 
 
 import InfiniteScroll from 'react-infinite-scroll-component';
+
+import kkeywords from './kkeywords.json'; 
+import skeywords from './skeywords.json'; 
+import akeywords from './akeywords.json'; 
 
 import K from './K.json'; 
 import S from './S.json'; 
@@ -360,6 +367,7 @@ class ListFilterSelect extends React.Component {
 	  super(props);
 		this.state={
       filt:'.',
+      data:[],
       checked:[],
       currpage:0,
       currtot:0,
@@ -368,9 +376,10 @@ class ListFilterSelect extends React.Component {
 	}
 	handleKeyPress=(e)=>{
 		 if (e.key === 'Enter') {
+        console.log( this.refs.quickfilter)
  				this.setState({
-          currpage:0,
-    		  filt: this.refs.quickfilter.input.value 
+          currpage:0
+    		  //filt: this.refs.quickfilter.input.value
         });
     }
 	}
@@ -379,6 +388,12 @@ class ListFilterSelect extends React.Component {
       this.setState({currpage:this.state.currpage+1})
     },50)
   }
+  handleUpdateInput = (value) => {
+    this.setState({
+      data: this.props.keywords.filter(k=>k.indexOf(value)!=-1).sort().slice(0,20),
+      filt:value
+    });
+  };
   render(){
 		let filt=(this.state.filt||' ').toLowerCase();
 		let filtered=[];
@@ -390,13 +405,14 @@ class ListFilterSelect extends React.Component {
 		}
     let tot=filtered.length;
     let torender=filtered.slice(0,this.state.currpage*this.state.pagesize+this.state.pagesize )
-    //console.log(this.state.currpage,tot,torender, )
     return (
       <div id='container'>
 			<div>
-      <TextField style={{float:'left'}} ref="quickfilter"
+      <AutoComplete style={{float:'left'}} ref="quickfilter"
          hintText="Quick Filter (Press Enter)"
          onKeyPress={this.handleKeyPress}
+         dataSource={this.state.data}
+         onUpdateInput={this.handleUpdateInput}
       />
 			</div>
 			<div style={{display:'inline-block', margin:0, width:'100%'}}>
@@ -503,9 +519,9 @@ class NICEStepper extends React.Component {
 
   getStepContent=(stepIndex)=>{
 		switch (stepIndex){
-			case 0: return (<ListFilterSelect id={'lfs0'} list={K} checked={Array.from(this.state.sel_k)} onCheck={this.handleCheck_K}/>);
-			case 1: return (<ListFilterSelect id={'lfs1'} list={S} checked={Array.from(this.state.sel_s)} onCheck={this.handleCheck_S}/>);
-			case 2: return (<ListFilterSelect id={'lfs2'} list={A} checked={Array.from(this.state.sel_a)} onCheck={this.handleCheck_A}/>); 
+			case 0: return (<ListFilterSelect id={'lfs0'} list={K} keywords={kkeywords} checked={Array.from(this.state.sel_k)} onCheck={this.handleCheck_K}/>);
+			case 1: return (<ListFilterSelect id={'lfs1'} list={S} keywords={skeywords} checked={Array.from(this.state.sel_s)} onCheck={this.handleCheck_S}/>);
+			case 2: return (<ListFilterSelect id={'lfs2'} list={A} keywords={akeywords} checked={Array.from(this.state.sel_a)} onCheck={this.handleCheck_A}/>); 
 			default: return 'NO' ;
 		}
 	};

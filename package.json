@@ -24,6 +24,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^1.1.0",
+    "retext": "^5.0.0",
+    "retext-keywords": "^4.0.1"
   }
 }
