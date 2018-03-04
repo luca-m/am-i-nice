@@ -368,7 +368,7 @@ class ListFilterSelect extends React.Component {
 		this.state={
       filt:'.',
       data:[],
-      checked:[],
+      checked:new Set(),
       currpage:0,
       currtot:0,
       pagesize:50
@@ -393,6 +393,10 @@ class ListFilterSelect extends React.Component {
       data: this.props.keywords.filter(k=>k.indexOf(value)!=-1).sort().slice(0,20),
       filt:value
     });
+  };
+  handleCheckedVisal=(e,isChecked)=>{
+		if (isChecked){ this.state.checked.add(e)}
+		else { this.state.checked.delete(e)}
   };
   render(){
 		let filt=(this.state.filt||' ').toLowerCase();
@@ -442,8 +446,8 @@ class ListFilterSelect extends React.Component {
 				 		torender
     		     .map((k)=><ListItem 
       	         key={k.id} 
-      	         leftCheckbox={<Checkbox defaultChecked={this.props.checked.indexOf(String(k.id))!=-1}  
-      	         onCheck={(e,c)=>{this.props.onCheck(k.id,c)}} />} 
+      	         leftCheckbox={<Checkbox defaultChecked={this.props.checked.indexOf(String(k.id))!=-1||this.state.checked.has(k.id)}  
+      	         onCheck={(e,c)=>{this.props.onCheck(k.id,c); this.handleCheckedVisal(k.id,c) }} />} 
       	         primaryText={k.desc} 
       	         secondaryText={k.id}/>)
       	 }
