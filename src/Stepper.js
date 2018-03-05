@@ -19,6 +19,9 @@ import Divider from 'material-ui/Divider';
 import Checkbox from 'material-ui/Checkbox';
 import Dialog from 'material-ui/Dialog';
 
+import Highlight from 'react-highlighter';
+
+
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {red200,red100,lightBlue100,green200,green300} from 'material-ui/styles/colors';
 
@@ -366,8 +369,9 @@ class ListFilterSelect extends React.Component {
 	constructor(props) {
 	  super(props);
 		this.state={
-      filt:'.',
+      filt:'',
       data:[],
+      kwordchips:props.keywords,
       checked:new Set(),
       currpage:0,
       currtot:0,
@@ -376,10 +380,8 @@ class ListFilterSelect extends React.Component {
 	}
 	handleKeyPress=(e)=>{
 		 if (e.key === 'Enter') {
-        console.log( this.refs.quickfilter)
  				this.setState({
           currpage:0
-    		  //filt: this.refs.quickfilter.input.value
         });
     }
 	}
@@ -390,13 +392,17 @@ class ListFilterSelect extends React.Component {
   }
   handleUpdateInput = (value) => {
     this.setState({
-      data: this.props.keywords.filter(k=>k.indexOf(value)!=-1).sort().slice(0,20),
+      data: this.props.keywords.filter(k=>k.indexOf(value)!=-1).sort().slice(0,5),
       filt:value
     });
   };
   handleCheckedVisal=(e,isChecked)=>{
-		if (isChecked){ this.state.checked.add(e)}
-		else { this.state.checked.delete(e)}
+		if (isChecked){ this.state.checked.add(e) }
+		else { this.state.checked.delete(e) }
+  };
+  handleChipClick=(kw)=>{
+    var kwchips=this.state.kwordchips.filter(x=>x!=kw)
+    this.setState({ kwordchips:kwchips, filt:kw });
   };
   render(){
 		let filt=(this.state.filt||' ').toLowerCase();
@@ -417,7 +423,7 @@ class ListFilterSelect extends React.Component {
          onKeyPress={this.handleKeyPress}
          dataSource={this.state.data}
          onUpdateInput={this.handleUpdateInput}
-      />
+      /> <div style={{margin:2, fontSize:'xx-small', display:'flex',flexWrap: 'wrap'}}>{this.state.kwordchips.slice(0,10).map(kc=><Chip key={kc} onClick={()=>{this.handleChipClick(kc)}}>{kc}</Chip>)}{(this.state.kwordchips.length>10?<Chip key='cdots' style={{backgroundColor:'darkGrey'}}>...</Chip>:<span></span>)}</div>
 			</div>
 			<div style={{display:'inline-block', margin:0, width:'100%'}}>
       
@@ -448,7 +454,7 @@ class ListFilterSelect extends React.Component {
       	         key={k.id} 
       	         leftCheckbox={<Checkbox defaultChecked={this.props.checked.indexOf(String(k.id))!=-1||this.state.checked.has(k.id)}  
       	         onCheck={(e,c)=>{this.props.onCheck(k.id,c); this.handleCheckedVisal(k.id,c) }} />} 
-      	         primaryText={k.desc} 
+      	         primaryText={<Highlight search={this.state.filt} matchStyle={{backgroundColor:'#FDF900'}}>{k.desc}</Highlight>} 
       	         secondaryText={k.id}/>)
       	 }
     		 
@@ -523,9 +529,9 @@ class NICEStepper extends React.Component {
 
   getStepContent=(stepIndex)=>{
 		switch (stepIndex){
-			case 0: return (<ListFilterSelect id={'lfs0'} list={K} keywords={kkeywords} checked={Array.from(this.state.sel_k)} onCheck={this.handleCheck_K}/>);
-			case 1: return (<ListFilterSelect id={'lfs1'} list={S} keywords={skeywords} checked={Array.from(this.state.sel_s)} onCheck={this.handleCheck_S}/>);
-			case 2: return (<ListFilterSelect id={'lfs2'} list={A} keywords={akeywords} checked={Array.from(this.state.sel_a)} onCheck={this.handleCheck_A}/>); 
+			case 0: return (<div><ListFilterSelect list={K} keywords={kkeywords} checked={Array.from(this.state.sel_k)} onCheck={this.handleCheck_K}/></div>);
+			case 1: return (<div><div><ListFilterSelect list={S} keywords={skeywords} checked={Array.from(this.state.sel_s)} onCheck={this.handleCheck_S}/></div></div>);
+			case 2: return (<div><ListFilterSelect list={A} keywords={akeywords} checked={Array.from(this.state.sel_a)} onCheck={this.handleCheck_A}/></div>); 
 			default: return 'NO' ;
 		}
 	};
