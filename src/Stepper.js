@@ -423,7 +423,16 @@ class ListFilterSelect extends React.Component {
          onKeyPress={this.handleKeyPress}
          dataSource={this.state.data}
          onUpdateInput={this.handleUpdateInput}
-      /> <div style={{margin:2, fontSize:'xx-small', display:'flex',flexWrap: 'wrap'}}>{this.state.kwordchips.slice(0,10).map(kc=><Chip key={kc} onClick={()=>{this.handleChipClick(kc)}}>{kc}</Chip>)}{(this.state.kwordchips.length>10?<Chip key='cdots' style={{backgroundColor:'darkGrey'}}>...</Chip>:<span></span>)}</div>
+      /> <div style={{margin:2, fontSize:'xx-small', display:'flex',flexWrap: 'wrap'}}>{
+            this.state.kwordchips
+              .slice(0,10)
+              .map(kc=><Chip key={kc} 
+                  onClick={()=>{this.handleChipClick(kc)}}>
+                {kc}</Chip>)}
+         {(this.state.kwordchips.length>10 ? 
+             <Chip key='cdots' style={{backgroundColor:'darkGrey'}}><span style={{fontSize:'x-small'}}>...other {this.state.kwordchips.length-10}</span></Chip>
+               :<span></span>
+          )}</div>
 			</div>
 			<div style={{display:'inline-block', margin:0, width:'100%'}}>
       
