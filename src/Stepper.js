@@ -392,7 +392,7 @@ class ListFilterSelect extends React.Component {
   }
   handleUpdateInput = (value) => {
     this.setState({
-      data: this.props.keywords.filter(k=>k.indexOf(value)!=-1).sort().slice(0,5),
+      data: this.props.keywords.filter(k=>k.indexOf(value)!=-1).slice(0,5),
       filt:value
     });
   };

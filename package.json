@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "gh-pages": "^1.1.0",
+    "ml-pca": "^2.1.0",
     "retext": "^5.0.0",
     "retext-keywords": "^4.0.1"
   }
