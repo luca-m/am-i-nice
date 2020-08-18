@@ -28,20 +28,17 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           
-          <h1 className="App-title"><img style={{marginRight:20}} src={logo} className="App-logo" alt="logo" />How NICE am I?</h1>
-          <h2 className="App-intro"><i>NICE Cybersecurity Workforce Framework <span style={{fontSize:'x-small'}}>(unofficial) </span>Mapper</i></h2>
-<a href="https://www.nist.gov/itl/applied-cybersecurity/nice/resources/nice-cybersecurity-workforce-framework" />
+          <h1 className="App-title">NICE Cybersecurity Workforce Framework (unofficial) Mapper</h1>
+        		<h2 className="App-intro">
+        		  <span style={{display:'inline-block', fontSize:'100%', topMargin:15 }}>Are you building a career in the CyberSecurity industry?<br/>You think you got skills in different CyberSecurity disciplines but you still don't figure out the best role for you?</span><br/>
+        		 <span style={{display:'inline-block', fontSize:'110%', topMargin:5 }}><b>You are in the right place.</b></span><span style={{display:'inline-block', fontSize:'100%',topMargin:5}}> Just follow the steps and find out your best match over the <a style={{ color:"#FFF" }} target='_blank' href='https://www.nist.gov/itl/applied-cybersecurity/nice/resources/nice-cybersecurity-workforce-framework'>NIST SP-800-181</a></span>
+        		</h2>
+
         </header>
         <div>
           <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
           <div>
 					<Paper style={{marginBottom:8}} zDepth={2} rounded={true} >
-        		<div className="App-intro">
-        		  <span style={{display:'inline-block', fontSize:'80%', topMargin:15 }}>Are you building a career in CyberSec?
-        		  You got skills, abilities and knowledge in different cyber-security <br/>disciplines but you still don't figure out the best role for your current profile?</span><br/>
-        		 <span style={{display:'inline-block', fontSize:'100%', topMargin:5 }}><b>You are in the right place, </b></span><br/>
-        		 <span style={{display:'inline-block', fontSize:'80%',topMargin:5}}>just follow the steps and find out your best match over the <a target='_blank' href='https://www.nist.gov/itl/applied-cybersecurity/nice/resources/nice-cybersecurity-workforce-framework'><img src={nistLogo} height={10} /></a> SP-800-181</span>
-        		</div>
 					</Paper>
           <NICEStepper/>
 					<Divider />
