@@ -28,10 +28,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <MetaTags>
       <title>NICE CyberSecurity Framework (un-official) Mapper</title>
       <meta id="meta-description" name="description" content="Mapping skills, abilities and knowledge to NICE Cybersecurity framework to find out the best career profile match." />
       <meta id="og-title" property="og:title" content="NICE CyberSecurity Framework (un-official) Mapper" />
       <meta id="og-image" property="og:image" content="public/screen.jpg" />
+      </MetaTags>
 
         <header className="App-header">
           
