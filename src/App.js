@@ -17,6 +17,10 @@ import Github from 'mui-icons/ionicons/logo-github'
 import Twitter from 'mui-icons/ionicons/logo-twitter'
 import Linkedin from 'mui-icons/ionicons/logo-linkedin'
 import NICEStepper from './Stepper';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-114902362-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 class App extends Component {
   render() {
@@ -46,10 +50,6 @@ class App extends Component {
       			href="https://github.com/luca-m/am-i-nice"
       			target="_blank"
     			><Github/></IconButton>
-					<IconButton
-      			href="https://twitter.com/luc4m"
-      			target="_blank"
-    			><Twitter/></IconButton>
 					<IconButton
       			href="https://www.linkedin.com/in/allemco/"
       			target="_blank"
