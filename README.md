@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/luca-m/am-i-nice)
+
 # am-i-nice
 _(Unofficial) NICE Cybersecurity Workforce Framework mapper_
 
